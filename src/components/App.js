@@ -1,11 +1,12 @@
 //App Template to be used on everypage
 import React, { PropTypes } from 'react';
+import Header from './common/Header';
 
 class App extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <p>header...</p>
+                <Header />
                 {this.props.children}
             </div>
         );
