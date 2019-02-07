@@ -1,4 +1,6 @@
+import * as types from  './actionTypes'
+
 export function createCourse(course) {
     //can omit : course
-    return { type : "CREATE_COURSE", course};
+    return { type : types.CREATE_COURSE, course};
 }
