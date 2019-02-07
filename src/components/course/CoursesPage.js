@@ -1,46 +1,73 @@
-import React, {Proptypes} from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends React.Component {
-    constructor(props, context){
+    constructor(props, context) {
         super(props, context);
         this.state = {
-            course: { title : "" }
+            course: { title: "" }
         };
-        
+
         //bind in the constructor to improve performance 
         this.onClickSave = this.onClickSave.bind(this);
         this.onTitleChange = this.onTitleChange.bind(this);
     }
 
 
-    onTitleChange(event){
+    onTitleChange(event) {
         const course = this.state.course;
         course.title = event.target.value;
-        this.setState({ course: course});
+        this.setState({ course: course });
     }
 
-    onClickSave(){
-        alert(`Saving ${this.state.course.title}`);
+    onClickSave() {
+        this.props.actions.createCourse(this.state.course);
     }
 
-    render (){
+    courseRow(course, index) {
+        return <div key={index}>{course.title}</div>;
+    }
+
+    render() {
         return (
             <div>
                 <h1>Courses</h1>
+                {this.props.courses.map(this.courseRow)}
                 <h2>Add Course</h2>
-            <input 
-            type="text"
-            onChange={this.onTitleChange}
-            value={this.state.course.title}
-            />
-             <input 
-            type="submit"
-            onClick={this.onClickSave}
-            value="Save"
-            />
+                <input
+                    type="text"
+                    onChange={this.onTitleChange}
+                    value={this.state.course.title}
+                />
+                <input
+                    type="submit"
+                    onClick={this.onClickSave}
+                    value="Save"
+                />
             </div>
         );
     }
 }
 
-export default CoursesPage;
+CoursesPage.propTypes = {
+    actions: PropTypes.object.isRequired,
+    courses: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        courses: state.courses
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+   return {
+       //omit parenthesis single param
+    actions: bindActionCreators(courseActions, dispatch)
+   };
+}
+
+//no mapDispatchToProps function dispatch function is injected by connect
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
