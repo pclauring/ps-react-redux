@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
+import CourseList from './CourseList';
 import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends React.Component {
@@ -11,31 +12,33 @@ class CoursesPage extends React.Component {
         };
 
         //bind in the constructor to improve performance 
-        this.onClickSave = this.onClickSave.bind(this);
-        this.onTitleChange = this.onTitleChange.bind(this);
+        // this.onClickSave = this.onClickSave.bind(this);
+        // this.onTitleChange = this.onTitleChange.bind(this);
     }
 
 
-    onTitleChange(event) {
-        const course = this.state.course;
-        course.title = event.target.value;
-        this.setState({ course: course });
-    }
+    // onTitleChange(event) {
+    //     const course = this.state.course;
+    //     course.title = event.target.value;
+    //     this.setState({ course: course });
+    // }
 
-    onClickSave() {
-        this.props.actions.createCourse(this.state.course);
-    }
+    // onClickSave() {
+    //     this.props.actions.createCourse(this.state.course);
+    // }
 
     courseRow(course, index) {
         return <div key={index}>{course.title}</div>;
     }
 
     render() {
+
+    const {courses} = this.props;
         return (
             <div>
                 <h1>Courses</h1>
-                {this.props.courses.map(this.courseRow)}
-                <h2>Add Course</h2>
+                <CourseList courses={courses} />
+                {/* <h2>Add Course</h2>
                 <input
                     type="text"
                     onChange={this.onTitleChange}
@@ -45,7 +48,7 @@ class CoursesPage extends React.Component {
                     type="submit"
                     onClick={this.onClickSave}
                     value="Save"
-                />
+                /> */}
             </div>
         );
     }
