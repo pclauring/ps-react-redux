@@ -68,8 +68,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
    return {
        //omit parenthesis single param
-    actions: bindActionCreators(courseActions, dispatch)
-   };
+       actions: bindActionCreators(courseActions, dispatch)
+    };
 }
 
 //no mapDispatchToProps function dispatch function is injected by connect
