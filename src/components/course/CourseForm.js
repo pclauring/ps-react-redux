@@ -11,7 +11,8 @@ const CourseForm = ({course, allAuthors, onSave, onChange, loading, errors}) => 
             label="Title"
             value={course.title}
             onChange={onChange}
-            error={errors.title} />
+           // errors={errors.title}
+             />
 
             <SelectInput
             name="authorId"
@@ -20,7 +21,8 @@ const CourseForm = ({course, allAuthors, onSave, onChange, loading, errors}) => 
             defaultOption="Select author"
             options={allAuthors}
             onChange={onChange}
-            error={errors.authorId} />
+           // errors={errors.authorId}
+             />
 
             <input
             type="submit"
@@ -28,7 +30,6 @@ const CourseForm = ({course, allAuthors, onSave, onChange, loading, errors}) => 
             value={loading ? 'Saving...': 'Save'}
             className="btn btn-primary"
             onClick={onSave} />
-
         </form>
     );
 };

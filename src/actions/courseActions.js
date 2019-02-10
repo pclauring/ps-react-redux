@@ -11,6 +11,16 @@ export function loadCoursesSuccess(courses) {
     return { type : types.LOAD_COURSES_SUCCESS, courses};
 }
 
+export function updateCourseSuccess(courses) {
+    //can omit : course
+    return { type : types.UPDATE_COURSE_SUCCESS, courses};
+}
+
+export function createCourseSuccess(courses) {
+    //can omit : course
+    return { type : types.CREATE_COURSE_SUCCESS, courses};
+}
+
 export function loadCourses(){
     return function(dispatch) {
         return courseApi.getAllCourses().then(courses => {
@@ -18,5 +28,17 @@ export function loadCourses(){
         }).catch(error => {
             throw(error);
         });
+    };
+}
+
+export function saveCourse(course){
+    //getState part of redux allows you to access redux store without having to pass it
+    return function(dispatch, getState){
+        return courseApi.saveCourse(course).then(savedCourse => {
+            course.id ? dispatch(updateCourseSuccess(savedCourse)) :
+            dispatch(createCourseSuccess(savedCourse));
+        }).catch(error =>{
+            throw(error);
+         });
     };
 }
