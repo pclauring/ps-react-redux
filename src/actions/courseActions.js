@@ -11,14 +11,14 @@ export function loadCoursesSuccess(courses) {
     return { type : types.LOAD_COURSES_SUCCESS, courses};
 }
 
-export function updateCourseSuccess(courses) {
+export function updateCourseSuccess(course) {
     //can omit : course
-    return { type : types.UPDATE_COURSE_SUCCESS, courses};
+    return { type : types.UPDATE_COURSE_SUCCESS, course};
 }
 
-export function createCourseSuccess(courses) {
+export function createCourseSuccess(course) {
     //can omit : course
-    return { type : types.CREATE_COURSE_SUCCESS, courses};
+    return { type : types.CREATE_COURSE_SUCCESS, course : course};
 }
 
 export function loadCourses(){
