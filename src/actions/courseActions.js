@@ -1,6 +1,6 @@
 import * as types from  './actionTypes';
 import courseApi from '../api/mockCourseApi';
-import {beginAjaxCall} from './ajaxStatusActions';
+import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function createCourse(course) {
     //can omit : course
@@ -24,10 +24,11 @@ export function createCourseSuccess(course) {
 
 export function loadCourses(){
     return function(dispatch) {
-        dispatch(beginAjaxCall);
+        dispatch(beginAjaxCall());
         return courseApi.getAllCourses().then(courses => {
             dispatch(loadCoursesSuccess(courses));
         }).catch(error => {
+            dispatch(ajaxCallError(error));
             throw(error);
         });
     };
@@ -36,11 +37,12 @@ export function loadCourses(){
 export function saveCourse(course){
     //getState part of redux allows you to access redux store without having to pass it
     return function(dispatch, getState){
-        dispatch(beginAjaxCall);
+        dispatch(beginAjaxCall());
         return courseApi.saveCourse(course).then(savedCourse => {
             course.id ? dispatch(updateCourseSuccess(savedCourse)) :
             dispatch(createCourseSuccess(savedCourse));
         }).catch(error =>{
+            dispatch(ajaxCallError(error));
             throw(error);
          });
     };

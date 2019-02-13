@@ -7,6 +7,7 @@ import routes from './routes';
 import './styles/styles.css';
 import { loadCourses } from './actions/courseActions';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/toastr/build/toastr.min.css';
 import configureStore from './store/configureStore';
 import { loadAuthors } from './actions/authorActions';
 
