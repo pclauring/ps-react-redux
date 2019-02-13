@@ -3,7 +3,7 @@ import CourseListRow from './CourseListRow';
 
 const CourseList = ({courses}) => {
     return (
-        <table>
+        <table className="table">
             <thead>
                 <tr>
                 <th>&nbsp;</th>
