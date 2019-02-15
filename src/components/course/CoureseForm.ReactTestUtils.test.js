@@ -36,7 +36,7 @@ describe('CourseForm via React Test Utils', () => {
         expect(submitButton.props.value).toBe('Save');
     });
 
-    it('save button is labeled "Save" when not saving', () => {
+    it('save button is labeled "Saving..." when saving', () => {
         const { output } = setup(true);
         const submitButton = output.props.children[3];
         expect(submitButton.props.value).toBe('Saving...');
